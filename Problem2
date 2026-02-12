@@ -1,63 +1,40 @@
-//  Problem Statement: Given an array of integers, rotating array of elements by k elements either left or right.
+# left rotate by d
 
-// Left rotate
-
-import java.util.Scanner;
-
-public class p2 {
-    static void leftRotatebyD(int[] arr,int n){
-        n = n % arr.length;
-        if (n==0)
-            return;
-        int[] temp= new int[n];
-        for (int i=0; i<n; i++)
-            temp[i] = arr[i];
-        for (int i=0; i<arr.length-n; i++)
-            arr[i]= arr[n+i];
-        for (int i=0; i<n; i++)
-            arr[arr.length-n+i]= temp[i];
-    }
-
-    public static void main(String[] args) {
-        int[] arr= {2,4,6,5,1};
-        System.out.println("Enter the value of D:");
-        Scanner scanner = new Scanner(System.in);
-        int n= scanner.nextInt();
-        leftRotatebyD(arr,n);
-        for (int i=0; i<arr.length; i++){
-            System.out.print(arr[i]+" ");
-        }
-    }
-}
+def left_rotate_by_d(arr, d):
+    d = d % len(arr)   # Handle cases where d > length
+    if d == 0:
+        return arr
+    
+    temp = arr[:d]              # Store first d elements
+    arr[:len(arr)-d] = arr[d:]  # Shift remaining elements left
+    arr[len(arr)-d:] = temp     # Place temp at the end
+    
+    return arr
 
 
+arr = [2, 4, 6, 5, 1]
+d = int(input("Enter the value of D: "))
+left_rotate_by_d(arr, d)
 
-// Right rotate
+print(*arr)
 
-import java.util.Scanner;
 
-public class p2 {
-    static void rightRotatebyD(int[] arr,int n){
-        n = n % arr.length;
-        if (n==0)   
-            return;
-        int[] temp= new int[n];
-        for (int i=0; i<n; i++)
-            temp[i]= arr[arr.length-n+i];
-        for (int i=arr.length-1; i>=n; i--)
-            arr[i]= arr[i-n];
-        for (int i=0; i<n; i++)
-            arr[i]= temp[i];
-    }
+# right rotate by d
 
-    public static void main(String[] args) {
-        int[] arr= {2,4,6,5,1};
-        System.out.println("Enter the value of D:");
-        Scanner scanner = new Scanner(System.in);
-        int n= scanner.nextInt();
-        rightRotatebyD(arr,n);
-        for (int i=0; i<arr.length; i++){
-            System.out.print(arr[i]+" ");
-        }
-    }
-}
+def right_rotate_by_d(arr, d):
+    d = d % len(arr)
+    if d == 0:
+        return arr
+    
+    temp = arr[-d:]         # Store last d elements
+    arr[d:] = arr[:-d]      # Shift elements right
+    arr[:d] = temp          # Move temp to front
+    
+    return arr
+
+
+arr = [2, 4, 6, 5, 1]
+d = int(input("Enter the value of D: "))
+right_rotate_by_d(arr, d)
+
+print(*arr)
